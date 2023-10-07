@@ -1,29 +1,35 @@
-function App(Props) {
+import { Component } from "react";
 
-  const { notes } = Props;
-  const addNote = (event)=>{
-    event.preventDefault();
-  console.log(event.target);
+class App extends Component{
+  constructor(props){
+    super(props)
 
+    this.state = {
+      count:0,
+    };
   }
-  return (
-
+handleGoodClick(){
+  
+  this.setState({count:this.state.count+1})
+}
+ 
+render(){
+  return(
     <div>
-      <p>Hello World!</p>
-      <ul>
-        {
-          notes.map((note, index) => {
-            return <li key={index} >{note.content}</li>
-          })
-        }
-      </ul>
+      <h1>Give Feedback</h1>
+      <button onClick={this.handleGoodClick}>Good</button>
+      <button>Neutral</button>
+      <button>Bad</button>
 
-      <form action="">
-        <input type="text" />
-        <button onClick={addNote}>Save Note</button>
-      </form>
+      <p>Good {this.state.count}</p>
+      <p>Neutral</p>
+      <p>Bad</p>
     </div>
+
   )
+   
 }
 
-export default App; 
+}
+
+export default App;
