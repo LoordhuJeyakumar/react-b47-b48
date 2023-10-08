@@ -1,35 +1,21 @@
-import { Component } from "react";
+import React, { createContext, useState } from 'react';
+import ChildComponent from './components/ChildComponent';
 
-class App extends Component{
-  constructor(props){
-    super(props)
+// create a context
+const MessageContext = createContext();
 
-    this.state = {
-      count:0,
-    };
-  }
-handleGoodClick(){
-  
-  this.setState({count:this.state.count+1})
-}
- 
-render(){
-  return(
+function App() {
+
+  const [message, setMessage] = useState('Hello from App');
+
+  return (
     <div>
-      <h1>Give Feedback</h1>
-      <button onClick={this.handleGoodClick}>Good</button>
-      <button>Neutral</button>
-      <button>Bad</button>
-
-      <p>Good {this.state.count}</p>
-      <p>Neutral</p>
-      <p>Bad</p>
+      <h1>Parent Component</h1>
+      <MessageContext.Provider value={ [message, setMessage] }>
+        <ChildComponent />
+      </MessageContext.Provider>
     </div>
-
   )
-   
 }
 
-}
-
-export default App;
+export { App as default, MessageContext };
