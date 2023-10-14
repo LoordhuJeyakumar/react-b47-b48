@@ -1,21 +1,22 @@
-import React, { createContext, useState } from 'react';
-import ChildComponent from './components/ChildComponent';
-
-// create a context
-const MessageContext = createContext();
+import React, { useRef } from "react";
 
 function App() {
+  const inputRef = useRef(null);
 
-  const [message, setMessage] = useState('Hello from App');
+  const handleButtonClick = () => {
+    inputRef.current.focus();
+    console.log(inputRef);
+  };
 
   return (
     <div>
-      <h1>Parent Component</h1>
-      <MessageContext.Provider value={ [message, setMessage] }>
-        <ChildComponent />
-      </MessageContext.Provider>
+      App
+      <div>
+        <input type="text" ref={inputRef} />
+        <button onClick={handleButtonClick}>Focus Input</button>
+      </div>
     </div>
-  )
+  );
 }
 
-export { App as default, MessageContext };
+export default App;
