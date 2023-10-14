@@ -1,25 +1,20 @@
-import React, { useRef } from "react";
-import SetInputFocus from "./components/SetInputFocus";
+import React, { useReducer, useState } from 'react'
+import { initialState, reducer } from './components/reducers/CountReducer';
 
 
 function App() {
-  const inputRef = useRef(null);
 
-  const handleButtonClick = () => {
-    inputRef.current.focus();
-    console.log(inputRef);
-  };
+  const [state, dispatch] = useReducer(reducer, initialState) 
+ 
 
   return (
     <div>
-      App
-      <div>
-        <input type="text" ref={inputRef} />
-        <button onClick={handleButtonClick}>Focus Input</button>
-        <SetInputFocus inputRef={inputRef}></SetInputFocus>
-      </div>
+      <p>Count: {state.count}</p>
+      <button onClick={()=>dispatch({type: 'increment'})}>Increment</button>
+      <button onClick={()=>dispatch({type: 'decrement'})}>Decrement</button>
+      <button onClick={()=>dispatch({type: 'reset'})}>Reset</button>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
