@@ -2,6 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
 import './index.css'
+import { createStore } from 'redux'
 /* const notes = [
     {
         id:1,
@@ -30,9 +31,24 @@ import './index.css'
     }
 ] */
     
+const counterReducer = (state =0, action)=>{
+    switch(action.type){
+        case "INCR":
+            return state + 1;
+        case "DECR":
+            return state - 1;
+        case "ZERO":
+            return 0;    
+
+    }
+    
+}
+const store = createStore(counterReducer);
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   
-    <App/>
+    <Provider store = {store}>
+        <App/>
+    </Provider>
   
 )
