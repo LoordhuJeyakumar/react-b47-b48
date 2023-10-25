@@ -1,54 +1,22 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import App from './App.jsx'
-import './index.css'
-import { createStore } from 'redux'
-/* const notes = [
-    {
-        id:1,
-        content: 'Working with Lists',
-        important:true
-    },
-    {
-        id:2,
-        content:"Props Vs State",
-        important:false
-    },
-    {
-        id:3,
-        content:'Usage ofkeys',
-        important:false
-    },
-    {
-        id:4,
-        content:'Conditional Rendering',
-        important:true
-    },
-    {
-        id:5,
-        content:'Handling Events',
-        important:true
-    }
-] */
-    
-const counterReducer = (state =0, action)=>{
-    switch(action.type){
-        case "INCR":
-            return state + 1;
-        case "DECR":
-            return state - 1;
-        case "ZERO":
-            return 0;    
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import App from './App.jsx';
+import noteReducer from './reducers/noteReducer.jsx';
+import filterReducer from './reducers/filterReducer.jsx';
+import { combineReducers, createStore } from 'redux';
+import { Provider } from 'react-redux';
 
-    }
-    
-}
-const store = createStore(counterReducer);
+const reducer = combineReducers({
+    notes: noteReducer,
+    filter: filterReducer
+})
+
+const store = createStore(reducer);
+
+console.log(store.getState());
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  
-    <Provider store = {store}>
-        <App/>
+    <Provider store={store}>
+        <App />
     </Provider>
-  
-)
+);

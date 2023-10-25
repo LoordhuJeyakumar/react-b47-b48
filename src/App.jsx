@@ -1,13 +1,17 @@
-import React from 'react'
+import React from 'react';
+import Notes from './components/Notes';
+import NewNote from './components/NewNote';
+import VisibilityFilter from './components/VisibilityFilter';
 
 function App() {
 
-  const dispatch = useDispatch();
-  const counter = useSelector(state => state);
-
   return (
-    <div>App</div>
+    <div>
+      <NewNote />
+      <VisibilityFilter />
+      <Notes />
+    </div>
   )
 }
 
-export default App
+export default App;
